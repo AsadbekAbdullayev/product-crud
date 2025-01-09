@@ -5,8 +5,16 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 const CrudHome = () => {
-	const [products, setProducts] = useState([]);
-	const [categories, setCategories] = useState([]);
+	const [products, setProducts] = useState([
+		{
+			title: 'Apple MacBook Air M2 (2023)',
+			price: '1500',
+			description:
+				"The new MacBook Air, powered by the M2 chip, delivers faster performance, longer battery life, and a stunning 13.6-inch Liquid Retina display. Ultra-slim and lightweight, it's perfect for students and professionals on the go.",
+			category: 'Laptops',
+		},
+	]);
+	const [categories, setCategories] = useState(['Laptops', 'Phones']);
 	const [newProduct, setNewProduct] = useState({
 		title: '',
 		price: '',
