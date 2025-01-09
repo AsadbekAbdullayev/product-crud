@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Select, Button, message, Popconfirm } from 'antd';
-//
+import { Input, Select, Button, message, Popconfirm, Empty } from 'antd';
+
 const { TextArea } = Input;
 const { Option } = Select;
-//
+
 const CrudHome = () => {
-	const [products, setProducts] = useState([
-		{
-			title: 'Apple MacBook Air M2 (2023)',
-			price: '1500',
-			description:
-				"The new MacBook Air, powered by the M2 chip, delivers faster performance, longer battery life, and a stunning 13.6-inch Liquid Retina display. Ultra-slim and lightweight, it's perfect for students and professionals on the go.",
-			category: 'Laptops',
-		},
-	]);
-	const [categories, setCategories] = useState(['Laptops', 'Phones']);
+	const [products, setProducts] = useState([]);
+	const [categories, setCategories] = useState([]);
 	const [newProduct, setNewProduct] = useState({
 		title: '',
 		price: '',
@@ -25,9 +17,33 @@ const CrudHome = () => {
 	const [selectedCategory, setSelectedCategory] = useState('');
 
 	useEffect(() => {
-		const storedProducts = JSON.parse(localStorage.getItem('products')) || [];
-		const storedCategories =
-			JSON.parse(localStorage.getItem('categories')) || [];
+		const initialProducts = [
+			{
+				title: 'Apple MacBook Air M2 (2023)',
+				price: '1500',
+				description:
+					"The new MacBook Air, powered by the M2 chip, delivers faster performance, longer battery life, and a stunning 13.6-inch Liquid Retina display. Ultra-slim and lightweight, it's perfect for students and professionals on the go.",
+				category: 'Laptops',
+			},
+		];
+		const initialCategories = ['Laptops', 'Phones'];
+
+		const storedProducts = [
+			...JSON.parse(localStorage.getItem('products')),
+			...initialProducts,
+		];
+		const storedCategories = [
+			...JSON.parse(localStorage.getItem('categories')),
+			...initialCategories,
+		];
+
+		if (!localStorage.getItem('products')) {
+			localStorage.setItem('products', JSON.stringify(initialProducts));
+		}
+		if (!localStorage.getItem('categories')) {
+			localStorage.setItem('categories', JSON.stringify(initialCategories));
+		}
+
 		setProducts(storedProducts);
 		setCategories(storedCategories);
 	}, []);
@@ -188,29 +204,33 @@ const CrudHome = () => {
 						</Option>
 					))}
 				</Select>
-				<ul>
-					{filteredProducts.map((product, index) => (
-						<li key={index} className="mb-1">
-							<strong>{product.title}</strong> - ${product.price}
-							<p>{product.description}</p>
-							<div className="flex justify-between items-center">
-								<p className="border  rounded-md border-blue-400 my-2 mb-5 p-1 w-fit">
-									{product.category}
-								</p>
-								<Popconfirm
-									title="Are you sure to delete this product?"
-									onConfirm={() => handleDeleteProduct(product)}
-									okText="Yes"
-									cancelText="No"
-								>
-									<Button type="danger" className="rounded border-red-600">
-										Delete
-									</Button>
-								</Popconfirm>
-							</div>
-						</li>
-					))}
-				</ul>
+				{filteredProducts.length > 0 ? (
+					<ul>
+						{filteredProducts.map((product, index) => (
+							<li key={index} className="mb-1">
+								<strong>{product.title}</strong> - ${product.price}
+								<p>{product.description}</p>
+								<div className="flex justify-between items-center">
+									<p className="border  rounded-md border-blue-400 my-2 mb-5 p-1 w-fit">
+										{product.category}
+									</p>
+									<Popconfirm
+										title="Are you sure to delete this product?"
+										onConfirm={() => handleDeleteProduct(product)}
+										okText="Yes"
+										cancelText="No"
+									>
+										<Button type="danger" className="rounded border-red-600">
+											Delete
+										</Button>
+									</Popconfirm>
+								</div>
+							</li>
+						))}
+					</ul>
+				) : (
+					<Empty description="No Products Found" />
+				)}
 			</div>
 		</div>
 	);
