@@ -1,0 +1,28 @@
+# image: node:18.17.0
+# stages:
+#   - build
+#   - deploy
+
+# variables:
+#   NODE_VERSION: '18'
+#   REACT_APP_API_URL: 'https://dev.api.talent.itic.uz/api' # Add other environment variables as needed
+
+# cache:
+#   paths:
+#     - node_modules/
+
+# before_script:
+#   - npm install --legacy-peer-deps
+
+# build:
+#   stage: build
+#   script:
+#     - cp .env.build .env
+#     - npm run build
+
+# deploy:
+#   stage: deploy
+#   only:
+#     - main
+#   script:
+#     - scp -r build/ user@109.94.172.191 -p 22013/var/www/talent.itic.uz/
