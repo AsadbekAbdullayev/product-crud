@@ -37,13 +37,6 @@ const CrudHome = () => {
 			...initialCategories,
 		];
 
-		if (!localStorage.getItem('products')) {
-			localStorage.setItem('products', JSON.stringify(initialProducts));
-		}
-		if (!localStorage.getItem('categories')) {
-			localStorage.setItem('categories', JSON.stringify(initialCategories));
-		}
-
 		setProducts(storedProducts);
 		setCategories(storedCategories);
 	}, []);
