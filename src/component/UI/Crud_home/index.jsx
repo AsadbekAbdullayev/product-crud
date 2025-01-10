@@ -27,15 +27,18 @@ const CrudHome = () => {
 			},
 		];
 		const initialCategories = ['Laptops', 'Phones'];
-
-		const storedProducts = [
-			...JSON.parse(localStorage.getItem('products')),
-			...initialProducts,
-		];
-		const storedCategories = [
-			...JSON.parse(localStorage.getItem('categories')),
-			...initialCategories,
-		];
+		console.log(
+			JSON.parse(localStorage.getItem('products')),
+			'JSON.parse(localStorage.getItem',
+		);
+		const storedProducts =
+			JSON.parse(localStorage.getItem('products'))?.length > 0
+				? [...JSON.parse(localStorage.getItem('products'))]
+				: initialProducts;
+		const storedCategories =
+			JSON.parse(localStorage.getItem('categories'))?.length > 0
+				? [...JSON.parse(localStorage.getItem('categories'))]
+				: initialCategories;
 
 		setProducts(storedProducts);
 		setCategories(storedCategories);
