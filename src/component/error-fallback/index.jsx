@@ -4,9 +4,7 @@ export const ErrorFallback = ({ error, resetErrorBoundary }) => (
 		<p>Something went wrong:</p>
 		<pre className="text-red-500">{error?.message}</pre>
 		<button type="button" onClick={resetErrorBoundary}>
-			Try again
-			
-			
+			Try again			
 		</button>
 	</div>
 );
