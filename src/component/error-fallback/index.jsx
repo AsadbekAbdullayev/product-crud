@@ -7,6 +7,7 @@ export const ErrorFallback = ({ error, resetErrorBoundary }) => (
 			Try again
 
 			
+			
 		</button>
 	</div>
 );
