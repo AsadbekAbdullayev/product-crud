@@ -5,6 +5,7 @@ export const ErrorFallback = ({ error, resetErrorBoundary }) => (
 		<pre className="text-red-500">{error?.message}</pre>
 		<button type="button" onClick={resetErrorBoundary}>
 			Try again
+
 			
 		</button>
 	</div>
