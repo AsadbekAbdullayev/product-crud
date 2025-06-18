@@ -10,6 +10,7 @@ import generelReducer from '../slices/generelSlice';
 
 
 
+
 const reducers = combineReducers({
 	generelReducer,
 });
