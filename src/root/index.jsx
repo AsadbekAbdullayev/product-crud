@@ -9,6 +9,7 @@ import { Data } from '../utils/index';
 
 
 
+
 function Root() {
 	return (
 		<Suspense fallback={<Loader />}>
