@@ -10,6 +10,7 @@ import HomeComponent from '@/component/UI/Crud_home';
 
 
 
+
 const Main = () => {
 	return <HomeComponent />;
 };
