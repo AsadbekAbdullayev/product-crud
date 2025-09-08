@@ -1,23 +1,26 @@
 import React from 'react';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-export const Loader = ({ size }) => {
+interface LoaderProps {
+	size?: number;
+}
+
+export const Loader: React.FC<LoaderProps> = ({ size = 62 }) => {
 	const { pathname } = useLocation();
+	const isAdmin = pathname.includes('admin');
+
 	return (
 		<div
-			className={`w-full h-screen flex items-center justify-center bg-[${
-				pathname.includes('admin') && '#000'
-			}] bg-opacity-[${pathname.includes('admin') && '10'}]`}
+			className={`w-full h-screen flex items-center justify-center ${
+				isAdmin ? 'bg-black bg-opacity-10' : 'bg-white'
+			}`}
 		>
 			<Spin
 				indicator={
 					<LoadingOutlined
-						style={{
-							fontSize: size || 62,
-							color: '#9ec8fc',
-						}}
+						style={{ fontSize: size, color: '#9ec8fc' }}
 						spin
 					/>
 				}
