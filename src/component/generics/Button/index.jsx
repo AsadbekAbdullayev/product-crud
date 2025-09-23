@@ -1,32 +1,44 @@
 import React from 'react';
 import { Button } from './style';
+
 const GenericButton = ({
-	marginleft,
-	marginright,
 	children,
-	bordercolor,
-	margin,
-	disabled,
+	loading = false,
+	disabled = false,
 	component,
+	icon,
+	openFilter,
+	style,
+	// styling props
+	margin,
+	marginLeft,
+	marginRight,
 	padding,
 	gap,
 	radius,
 	width,
 	height,
-	bgcolor,
+	bgcolor = '#fff',
 	bghovercolor,
 	hovercolor,
+	bordercolor,
 	position,
 	zIndex,
 	justifyContent,
-	icon,
-	openFilter,
-	loading,
-	...props
+	color,
+	...rest
 }) => {
+	const waveColor =
+		bgcolor === '#ffffff' ||
+		bgcolor === '#fff' ||
+		bgcolor === 'transparent' ||
+		bgcolor === 'white'
+			? color
+			: bgcolor;
+
 	return (
 		<Button
-			{...props}
+			{...rest}
 			zIndex={zIndex}
 			loading={loading}
 			position={position}
@@ -44,17 +56,12 @@ const GenericButton = ({
 			icon={icon}
 			margin={margin}
 			bordercolor={bordercolor}
-			marginright={marginright}
-			marginleft={marginleft}
+			marginRight={marginRight}
+			marginLeft={marginLeft}
 			openFilter={openFilter}
 			style={{
-				'--antd-wave-shadow-color':
-					props.bgcolor === '#ffffff' ||
-					props.bgcolor === '#fff' ||
-					props.bgcolor === 'transparent' ||
-					props.bgcolor === 'white'
-						? props.color
-						: props.bgcolor,
+				'--antd-wave-shadow-color': waveColor,
+				...style, // allow overriding styles
 			}}
 		>
 			{children}
